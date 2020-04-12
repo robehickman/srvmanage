@@ -52,4 +52,5 @@ pip3 install pyyaml
 mkdir /srv/http
 mkdir /srv/repos
 mkdir /srv/repos/web
+mkdir /root/ssh_keys
 
