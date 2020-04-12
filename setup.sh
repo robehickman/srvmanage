@@ -1,17 +1,30 @@
 apt-get update
 apt-get upgrade
 
+apt-get install -y htop git
+
 # Install mysql
 apt-get install -y mariadb-server
 service mysql start
 
 # Install and setup apache2
-apt-get install -y htop apache2 git
+# need newer version for acme v2
+echo "deb https://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list
+apt-get -t buster-backports install apache2
+
 a2enmod rewrite
 a2enmod proxy_http
-rm -f /etc/apache2/sites-available/*
-rm -f /etc/apache2/sites-enabled/*
+a2enmod ssl
+a2enmod md
 service apache2 restart
+
+ACMECONF=$(cat << EOF
+ServerAdmin mailto:robehickman@gmail.com
+MDCertificateAgreement accepted
+EOF
+)
+echo "$ACMECONF" > /etc/apache2/conf-enabled/zz_md_settings.conf
+
 
 # Install and setup PHP
 apt install apt-transport-https lsb-release
