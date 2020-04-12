@@ -12,6 +12,7 @@ service mysql start
 echo "deb https://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list
 apt-get -t buster-backports install apache2
 
+a2enmod http2
 a2enmod rewrite
 a2enmod proxy_http
 a2enmod proxy_fcgi

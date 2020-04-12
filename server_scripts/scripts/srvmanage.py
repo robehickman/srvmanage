@@ -1,13 +1,19 @@
 #!/usr/bin/python3
 """ Script to manage virtual hosted websites with apache, php-fpm and mysql """
 
-import os, sys, re, crypt, secrets, yaml, json, pymysql
+import os, sys, re, crypt, secrets, yaml, json, pymysql, fcntl
 from typing import Tuple
 
 # Script can only be run by the root user
 if os.geteuid() != 0:
     print('Must be root')
     quit()
+
+# Lock for sanity check
+try:
+    lockfile = open('/tmp/srvmanage_lock', 'w')
+    fcntl.flock(lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except IOError: raise SystemExit('Could not lock')
 
 # Load configuration
 with open('/root/srvmanage.yaml', 'r') as fle:
