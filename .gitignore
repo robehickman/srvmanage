@@ -1,0 +1,5 @@
+*.swp
+*.swo
+*.swm
+*.swn
+.mypy_cache
