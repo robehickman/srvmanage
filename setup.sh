@@ -14,6 +14,7 @@ apt-get -t buster-backports install apache2
 
 a2enmod rewrite
 a2enmod proxy_http
+a2enmod proxy_fcgi
 a2enmod ssl
 a2enmod md
 service apache2 restart
@@ -36,8 +37,8 @@ apt-get install php7.4-fpm php7.4-{bcmath,bz2,intl,gd,mbstring,mysqli,zip,imagic
 phpenmod mbstring
 
 # Install nodejs and rollup
-curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
-bash nodesource_setup.sh
+curl -sL https://deb.nodesource.com/setup_10.x -o /tmp/nodesource_setup.sh
+bash /tmp/nodesource_setup.sh
 apt install nodejs
 npm install -g rollup
 

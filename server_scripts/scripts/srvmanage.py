@@ -11,8 +11,10 @@ if os.geteuid() != 0:
 
 # Load configuration
 with open('/root/srvmanage.yaml', 'r') as fle:
-    config = yaml.load(fle.read())
+    config = yaml.load(fle.read(), Loader=yaml.SafeLoader)
 
+srv_ipv4        = config['srv_ipv4'] 
+srv_ipv6        = config['srv_ipv6'] 
 srvname         = config['srvname'] 
 apache_confdir  = config['apache_confdir']
 php_confdir     = config['php_confdir']
@@ -23,8 +25,6 @@ reporoot        = config['reporoot']
 db_host         = config['db_host']
 db_user         = config['db_user']
 db_pass         = config['db_pass']
-
-sqlite_file     = config['sqlite_file']
 
 
 #+++++++++++++++++++++++++++++++++++++
@@ -127,9 +127,20 @@ def delete_system_user(sitename: str) -> None:
 def create_apache_vhost(sitename: str) -> None:
 
     vhost = f"""
-<VirtualHost 178.79.156.15:80>
+MDomain {sitename}.{srvname}
+
+<VirtualHost [{srv_ipv6}]:80 {srv_ipv4}:80>
+    ServerName {sitename}.{srvname}
+
+    RewriteEngine On
+    RewriteRule ^(.*)$ https://{sitename}.{srvname}$1 [L,R=301]
+</VirtualHost>
+
+<VirtualHost [{srv_ipv6}]:443 {srv_ipv4}:443>
     ServerName {sitename}.{srvname}
     DocumentRoot {webroot}/{sitename}/docs
+
+    SSLEngine on
 
     ErrorLog  ${{APACHE_LOG_DIR}}/{sitename}_error.log
     CustomLog ${{APACHE_LOG_DIR}}/{sitename}_access.log combined

@@ -1,0 +1,13 @@
+srv_ipv4:        ''
+srv_ipv6:        ''
+srvname:         ''
+apache_confdir:  '/etc/apache2/sites-available'
+php_confdir:      '/etc/php/7.4/fpm/pool.d'
+fpm_sock_prefix: "/var/run/php7.4"
+webroot:         '/srv/http'
+reporoot:        '/srv/repos/web'
+
+db_host:         'localhost'
+db_user:         ''
+db_pass:         ''
+
