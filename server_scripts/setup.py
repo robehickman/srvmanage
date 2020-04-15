@@ -10,5 +10,6 @@ setup(
         'pymysql',
         'pyyaml',
     ],
+    packages=['srvmanage'],
     scripts=['scripts/srvmanage.py', 'scripts/backup_mysql.py'],
     zip_safe=False)
