@@ -1,3 +1,7 @@
+import os, sys, re, crypt, secrets, yaml, json, pymysql, fcntl
+from typing import Tuple
+
+#+++++++++++++++++++++++++++++++++++++
 srv_ipv4        = ''
 srv_ipv6        = ''
 srvname         = ''
@@ -241,7 +245,7 @@ def create_mysql_database(sitename: str, db_password = None) -> Tuple[str, str]:
 
     cursor.execute (f"CREATE USER '{sitename}'@'localhost' IDENTIFIED BY '{db_password}'")
     cursor.execute (f"CREATE DATABASE `m_%s`" % sitename)
-    cursor.execute (f"""GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,ALTER,INDEX,DROP
+    cursor.execute (f"""GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,ALTER,INDEX,DROP,LOCK TABLES
         ON `m_%s`.* TO '%s'@'localhost'""" % (sitename, sitename))
     connection.commit()
 

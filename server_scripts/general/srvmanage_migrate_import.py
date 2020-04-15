@@ -10,7 +10,7 @@ import crypt
 import yaml
 from typing import Tuple
 
-import srvmanage
+import srvmanage_core as srvmanage
 
 # Load configuration
 with open('/root/srvmanage.yaml', 'r') as fle:
@@ -58,12 +58,12 @@ for site in sites:
     srvmanage.create_mysql_database(site['site_name'], site['dbpass'])
 
     # Import database
-    srvmanage.import_mysql_database(site['site_name'], site['dbpass'])
+    import_mysql_database(site['site_name'], site['dbpass'])
 
     # create apache vhost
     srvmanage.create_apache_vhost(site['site_name'], False)
 
-    # create php fpm confif
+    # create php fpm config
     srvmanage.create_php_fpm_config(site['site_name'])
 
     # enable vhost if needed
@@ -75,6 +75,8 @@ for site in sites:
 
     # Fix permissions, these files need to be copied manually
     sitename = site['site_name']
+    webroot  = srvmanage.webroot
+    reporoot  = srvmanage.reporoot
     os.system('chown -Rf '+sitename+':'+sitename+' '+webroot+'/'+sitename)
     os.system('chmod -Rf 750 '+webroot+'/'+sitename)
 

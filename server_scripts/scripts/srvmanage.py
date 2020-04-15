@@ -3,7 +3,7 @@
 
 import os, sys, re, crypt, secrets, yaml, json, pymysql, fcntl
 from typing import Tuple
-import srvmanage
+import srvmanage_core as srvmanage
 
 # Script can only be run by the root user
 if os.geteuid() != 0:
