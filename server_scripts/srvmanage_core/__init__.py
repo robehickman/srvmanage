@@ -137,7 +137,7 @@ MDomain {sitename}.{srvname}
 
     ProxyPassMatch ^/(.*\.php(/.*)?)$ unix:{fpm_sock_prefix}-{sitename}.sock|fcgi://127.0.0.1:9000{webroot}/{sitename}/docs
 
-    <Directory {webroot}/{sitename}/docs">
+    <Directory "{webroot}/{sitename}/docs">
         AllowOverride All
         Require all granted
     </Directory>
