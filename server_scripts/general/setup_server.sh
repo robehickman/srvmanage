@@ -10,6 +10,7 @@ service mysql start
 # Install and setup apache2
 # need newer version for acme v2
 echo "deb https://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list
+apt-get update
 apt-get -t buster-backports install apache2
 
 a2enmod http2
