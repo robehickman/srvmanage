@@ -28,12 +28,13 @@ os.system(f"rsync -a {account}:/srv/http/ --exclude=*.git* {path / 'http'} --del
 
 print("-- Committing changes to git --")
 
-if not os. path. isdir(path / 'db_backup' / '.git'):
-    os.system(f"git -C {path / 'db_backup'} init")
+if not os. path. isdir(path / '.git'):
+    os.system(f"git -C {path} init")
 
-os.system(f"git -C {path / 'db_backup'} add .")
-os.system(f"git -C {path / 'db_backup'} commit -m 'backup'")
-os.system(f"git -C {path / 'db_backup'} gc")
+# TODO put everything in git for safety
+os.system(f"git -C {path} add .")
+os.system(f"git -C {path} commit -m 'backup'")
+#os.system(f"git -C {path} gc")
 
 os.system(f"date > {path / 'last_run.txt'}")
 
