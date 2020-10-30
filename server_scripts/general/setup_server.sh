@@ -55,3 +55,12 @@ mkdir /srv/repos
 mkdir /srv/repos/web
 mkdir /root/ssh_keys
 
+# Setup directories and links for backup system
+mkdir /root/remote_backup
+mkdir /root/remote_backup/backup
+mkdir /root/remote_backup/backup/mysql_backup
+ln -s /etc/apache2 /root/remote_backup/backup/apache2
+ln -s /etc/php /root/remote_backup/backup/php
+ln -s /srv/http /root/remote_backup/backup/http
+ln -s /srv/repos /root/remote_backup/backup/repos
+

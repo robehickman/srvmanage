@@ -264,6 +264,37 @@ def delete_mysql_database(sitename: str) -> None:
 
     connection.commit()
 
+#+++++++++++++++++++++++++++++++++++++
+def backup_mysql_databases(target_basedir: str) -> None:
+    if not target_basedir.endswith('/'):
+        target_basedir += '/'
+
+    # Make sure data dir exists
+    try:
+        os.makedirs(target_basedir)
+    except OSError as e:
+        pass
+
+    # delete previous backup
+    os.system('rm -rf ' + target_basedir + '*') 
+
+    # ==================
+    connection = db_connect()
+    cursor = connection.cursor()
+
+    cursor.execute ("show databases")
+    data = cursor.fetchall()
+
+    import pprint
+    pprint.pprint(data)
+
+    data = [i for i in data if i['Database'] not in ['information_schema', 'mysql', 'performance_schema']]
+
+    for row in data:
+        print('Backing up', row['Database'])
+        os.system("mysqldump -u "+db_user+" -p"+db_pass+" -h localhost "+
+             "--lock-tables=false --single-transaction  "+row['Database']+" > "+target_basedir+row['Database']+"_backup.sql");
+
 
 ####################################################################
 # Apache virtual host management

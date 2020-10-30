@@ -4,7 +4,7 @@ from subprocess import Popen, PIPE
 from pathlib import Path
 
 with open(str(Path.home() / '.update_sites.yaml'), 'r') as fle:
-    config = yaml.load(fle.read())
+    config = yaml.load(fle.read(), Loader=yaml.SafeLoader)
 
 path                       = Path(config['local_sites_path'])
 backup_accout_ssh_username = config['backup_accout_ssh_username']

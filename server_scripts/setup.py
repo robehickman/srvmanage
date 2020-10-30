@@ -11,5 +11,5 @@ setup(
         'pyyaml',
     ],
     packages=['srvmanage_core'],
-    scripts=['scripts/srvmanage.py', 'scripts/backup_mysql.py'],
+    scripts=['scripts/srvmanage.py', 'scripts/backup_mysql.py', 'scripts/remote_backup.py'],
     zip_safe=False)
