@@ -285,9 +285,6 @@ def backup_mysql_databases(target_basedir: str) -> None:
     cursor.execute ("show databases")
     data = cursor.fetchall()
 
-    import pprint
-    pprint.pprint(data)
-
     data = [i for i in data if i['Database'] not in ['information_schema', 'mysql', 'performance_schema']]
 
     for row in data:
