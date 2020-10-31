@@ -156,6 +156,10 @@ MDomain {sitename}.{srvname}
         cfile.write('It works!')
         cfile.close()
 
+        #copy ssh
+        os.system(f"mkdir {webroot}/{sitename}/.ssh") 
+        os.system(f"cp /root/ssh_keys/* {webroot}/{sitename}/.ssh/") 
+
         #fix permissions
         os.system(f"chown -Rf {sitename}:{sitename} {webroot}/{sitename}") 
         os.system(f"chmod -Rf 750 {webroot}/{sitename}") 
@@ -213,10 +217,6 @@ env -i git pull origin master"""
         cfile.write(hook)
 
     os.system(f"chmod +x {reporoot}/{sitename}/hooks/post-receive") 
-
-    #copy ssh
-    os.system(f"mkdir /srv/http/{sitename}/.ssh") 
-    os.system(f"cp /root/ssh_keys/* /srv/http/{sitename}/.ssh/") 
 
     #fix permissions
     os.system(f"chown -Rf {sitename} {reporoot}/{sitename}") 
