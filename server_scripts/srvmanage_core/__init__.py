@@ -8,6 +8,7 @@ srvname         = ''
 apache_confdir  = ''
 php_confdir     = ''
 fpm_sock_prefix = ''
+php_version     = ''
 webroot         = ''
 reporoot        = ''
 
@@ -311,5 +312,5 @@ def restart_apache2():
 # PHP=fpm management
 ####################################################################
 def restart_php_fpm():
-    os.system('service php7.4-fpm restart')
+    os.system('service php' + php_version + '-fpm restart')
 

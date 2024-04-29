@@ -8,13 +8,12 @@ apt-get install -y mariadb-server
 service mysql start
 
 # Install and setup apache2
-# need newer version for acme v2
-echo "deb https://deb.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list
 apt-get update
-apt-get -t buster-backports install apache2
+apt-get install apache2
 
 a2enmod http2
 a2enmod rewrite
+a2enmod headers
 a2enmod proxy_http
 a2enmod proxy_fcgi
 a2enmod ssl
@@ -28,14 +27,13 @@ EOF
 )
 echo "$ACMECONF" > /etc/apache2/conf-enabled/zz_md_settings.conf
 
-
 # Install and setup PHP
-apt install apt-transport-https lsb-release
+apt install apt-transport-https lsb-release ca-certificates wget
 wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' 
 apt update 
 
-apt-get install php7.4-fpm php7.4-{bcmath,bz2,intl,gd,mbstring,mysqli,zip,imagick}
+apt-get install php8.3-fpm php8.3-{bcmath,bz2,intl,curl,gd,mbstring,mysqli,zip,imagick}
 phpenmod mbstring
 
 # Install nodejs and rollup

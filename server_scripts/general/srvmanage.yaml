@@ -2,8 +2,9 @@ srv_ipv4:        ''
 srv_ipv6:        ''
 srvname:         ''
 apache_confdir:  '/etc/apache2/sites-available'
-php_confdir:      '/etc/php/7.4/fpm/pool.d'
-fpm_sock_prefix: "/var/run/php7.4"
+php_confdir:     '/etc/php/8.3/fpm/pool.d'
+fpm_sock_prefix: '/var/run/php8.3'
+php_version:     '8.3'
 webroot:         '/srv/http'
 reporoot:        '/srv/repos/web'
 

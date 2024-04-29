@@ -27,6 +27,7 @@ srvmanage.srvname         = config['srvname']
 srvmanage.apache_confdir  = config['apache_confdir']
 srvmanage.php_confdir     = config['php_confdir']
 srvmanage.fpm_sock_prefix = config['fpm_sock_prefix']
+srvmanage.php_version     = config['php_version']
 srvmanage.webroot         = config['webroot']
 srvmanage.reporoot        = config['reporoot']
 
