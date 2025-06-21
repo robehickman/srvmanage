@@ -14,6 +14,7 @@ apt-get install -y htop git wget curl
 apt-get install -y mariadb-server
 service mysql start
 
+# NOTE You need to set 'no engine substitution' option in config file manually
 
 # --------------------------------------------------------------------------
 # Install and setup apache2
