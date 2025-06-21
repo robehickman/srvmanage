@@ -105,6 +105,7 @@ apt inatall -y python3-yaml
 git clone https://github.com/robehickman/srvmanage.git
 cd srvmanage/server_scripts 
 pip3 install --break-system-packages . 
+cd ../..
 
 
 # --------------------------------------------------------------------------
