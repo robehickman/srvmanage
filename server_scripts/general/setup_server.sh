@@ -59,6 +59,7 @@ bash /tmp/nodesource_setup.sh
 apt install -y nodejs
 npm install -g rollup
 npm install -g uglifyjs
+npm install -g cssnano
 
 # --------------------------------------------------------------------------
 # Used for media handling
