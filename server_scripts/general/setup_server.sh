@@ -58,7 +58,7 @@ curl -fsSL https://deb.nodesource.com/setup_23.x -o /tmp/nodesource_setup.sh
 bash /tmp/nodesource_setup.sh
 apt install -y nodejs
 npm install -g rollup
-
+npm install -g uglifyjs
 
 # --------------------------------------------------------------------------
 # Used for media handling
